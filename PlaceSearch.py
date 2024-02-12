@@ -8,9 +8,9 @@ class PlaceSearch:
 
     def search_places(self, user_input):
         key_phrases = self.keyphrase_extractor.extract_keyphrases(user_input)
-        matching_rows = self.data[self.data['key_phrases'].apply(lambda x: any(phrase in x for phrase in key_phrases))]
+        filtered_df = self.data[self.data['key_phrases'].apply(lambda phrases: key_phrases in phrases)]
 
-        if not matching_rows.empty:
-            return matching_rows[['place_name']]
+        if not filtered_df.empty:
+            return filtered_df[["place_name", "text", "sentiment"]]
         else:
             return None
