@@ -1,6 +1,7 @@
 from transformers import AutoTokenizer, AutoConfig, AutoModelForSequenceClassification
 from scipy.special import softmax
 import numpy as np
+import torch
 
 
 class SentimentAnalysis:
@@ -8,6 +9,8 @@ class SentimentAnalysis:
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         self.config = AutoConfig.from_pretrained(model_name)
         self.model = AutoModelForSequenceClassification.from_pretrained(model_name)
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+        self.model = (self.model).to(device)
 
     def analyze_sentiment(self, text):
         try:

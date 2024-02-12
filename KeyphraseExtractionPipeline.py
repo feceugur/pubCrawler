@@ -1,10 +1,13 @@
 from transformers import TokenClassificationPipeline, AutoModelForTokenClassification, AutoTokenizer
 from transformers.pipelines import AggregationStrategy
+import torch
 
 
 class KeyphraseExtractionPipeline(TokenClassificationPipeline):
     def __init__(self, model_name):
         model = AutoModelForTokenClassification.from_pretrained(model_name)
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+        model = model.to(device)
         tokenizer = AutoTokenizer.from_pretrained(model_name)
 
         super().__init__(
