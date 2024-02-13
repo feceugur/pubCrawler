@@ -19,6 +19,10 @@ if matching_places is not None:
     df_concat = df_concat.drop(columns=['sentiment'])
     df_concat = df_concat.groupby('place_name').mean(numeric_only=True)
     df_concat['count'] = matching_places['place_name'].value_counts()
+    condition = df_concat['positive'] < 0.5
+    df_concat.loc[condition, 'info'] = 'Original count: ' + df_concat['count'].astype(str)
+    df_concat.loc[condition, 'count'] = 1
+    df_concat = df_concat.sort_values(by=['count', 'positive'], ascending=[False, False])
     print(df_concat)
 
 else:
