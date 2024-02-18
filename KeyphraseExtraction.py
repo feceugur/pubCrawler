@@ -10,7 +10,9 @@ class KeyphraseExtraction:
 
     def extract_keyphrases(self, text):
         key_phrases = self.keyphrase_extractor(text)
-        print(key_phrases[0]['word'])
-        return key_phrases[0]['word']
+        sorted_key_phrases = sorted(key_phrases, key=lambda x: x['score'], reverse=True)
+        sorted_words = [phrase['word'] for phrase in sorted_key_phrases]
+        print("Keyword(s): ",sorted_words)
+        return sorted_words
     
     
