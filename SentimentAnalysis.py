@@ -18,7 +18,6 @@ class SentimentAnalysis:
             output = self.model(**encoded_input)
             scores = output.logits.squeeze().detach().numpy()
             scores = softmax(scores)
-
             ranking = np.argsort(scores)
             ranking = ranking[::-1]
             results = []
