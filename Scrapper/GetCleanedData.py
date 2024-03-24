@@ -12,3 +12,4 @@ result = df_filtered[['place_name', 'review_text']]
 
 # Save the result to a new CSV file
 result.to_csv("/Users/fuldeneceugur/PycharmProjects/pubCrawler/Scrapper/recent_reviews.csv", index=False)
+

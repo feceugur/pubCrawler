@@ -1,2 +1,0 @@
-URL = "https://www.google.com/maps/place/Restaurante+Braseria+meson+bernat/@41.3976686,2.1916818,16z/data=!4m8!3m7!1s0x12a4a3177e442bdf:0x8a6fce9d4705cd4e!8m2!3d41.3976686!4d2.1942567!9m1!1b1!16s%2Fg%2F11cls7q7wj?entry=ttu"
-DriverLocation = "./Driver/chromedriver.exe"

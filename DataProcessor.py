@@ -19,9 +19,9 @@ class DataProcessor:
                 if review["review_text"] is not None:
                     text = review["review_text"]
                     text = preprocess_text(text)
-                     # Use a more precise regex pattern to capture the text between "\(translated by google\)" and "\(original\)"
+                    # Use a more precise regex pattern to capture the text between "\(translated by google\)" and "\(original\)"
                     result = re.search(r'\(translated by google\)(.*?)\(original\)', text, re.DOTALL)
-                
+
                     if result:
                         extracted_text = result.group(1)
                         extracted_text = re.sub(r'\n', '', extracted_text)
@@ -39,28 +39,26 @@ class DataProcessor:
                     })
 
         return data_list
-    
 
     def process_scrpd_data(self, csv_file_path):
         data_list = []
         df = pd.read_csv(csv_file_path)  # Read CSV file into DataFrame
-        
+
         for index, row in df.iterrows():  # Iterate over DataFrame rows
             place_name = row['place_name']
             review_text = row['review_text']
-            
+
             if pd.notnull(review_text):  # Check if review_text is not null
                 review_text = preprocess_text(review_text)
-                
+
                 sentiment_result = self.sentiment_analyzer.analyze_sentiment(review_text)
                 key_phrases_result = self.keyphrase_extractor(review_text)
-                
+
                 data_list.append({
                     "place_name": place_name,
                     "text": review_text,
                     "sentiment": sentiment_result,
                     "key_phrases": key_phrases_result
                 })
-        
-        return data_list
 
+        return data_list
